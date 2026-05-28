@@ -1,5 +1,13 @@
 # @adaline/xai
 
+## 1.3.6
+
+### Patch Changes
+
+- Updated dependencies [ab5f7df]
+  - @adaline/provider@1.10.5
+  - @adaline/types@1.15.1
+
 ## 1.3.5
 
 ### Patch Changes
