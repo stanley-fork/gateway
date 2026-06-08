@@ -1,5 +1,12 @@
 # @adaline/bedrock
 
+## 2.6.9
+
+### Patch Changes
+
+- Updated dependencies [233d4e4]
+  - @adaline/anthropic@1.13.9
+
 ## 2.6.8
 
 ### Patch Changes
