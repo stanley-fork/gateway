@@ -1,5 +1,11 @@
 # @adaline/google
 
+## 1.17.12
+
+### Patch Changes
+
+- ba89b82:
+
 ## 1.17.11
 
 ### Patch Changes
