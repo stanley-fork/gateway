@@ -8,5 +8,15 @@
     "modelName": "text-embedding-004",
     "currency": "USD",
     "inputPricePerMillion": 0
+  },
+  "gemini-embedding-001": {
+    "modelName": "gemini-embedding-001",
+    "currency": "USD",
+    "inputPricePerMillion": 0.15
+  },
+  "gemini-embedding-2": {
+    "modelName": "gemini-embedding-2",
+    "currency": "USD",
+    "inputPricePerMillion": 0.15
   }
 }
