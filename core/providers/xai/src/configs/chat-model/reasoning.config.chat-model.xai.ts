@@ -1,6 +1,15 @@
 import { z } from "zod";
 
-import { logProbs, maxTokens, reasoningEffort, seed, temperature, toolChoice, topLogProbs, topP } from "./common.config.chat-model.xai";
+import {
+  logProbs,
+  maxTokens,
+  reasoningEffortNoneLow,
+  seed,
+  temperature,
+  toolChoice,
+  topLogProbs,
+  topP,
+} from "./common.config.chat-model.xai";
 
 const ChatModelReasoningConfigSchema = (maxOutputTokens: number) =>
   z.object({
@@ -24,7 +33,10 @@ const ChatModelReasoningConfigDef = (maxOutputTokens: number) =>
     toolChoice: toolChoice.def,
   }) as const;
 
-const ChatModelMiniReasoningConfigSchema = (maxOutputTokens: number, _maxSequences: number) =>
+// grok-4.3 documents a reasoning_effort control confirmed for values 'none' and 'low' only
+// (see spec-reference comment in grok-4.3.xai.ts); higher effort levels are unverified,
+// so this variant reuses the 'reasoning_effort' wire param but scopes its choices accordingly.
+const ChatModelReasoningEffortConfigSchema = (maxOutputTokens: number) =>
   z.object({
     temperature: temperature.schema,
     maxTokens: maxTokens(maxOutputTokens).schema,
@@ -33,10 +45,10 @@ const ChatModelMiniReasoningConfigSchema = (maxOutputTokens: number, _maxSequenc
     logProbs: logProbs.schema,
     topLogProbs: topLogProbs.schema,
     toolChoice: toolChoice.schema,
-    reasoningEffort: reasoningEffort.schema,
+    reasoningEffort: reasoningEffortNoneLow.schema,
   });
 
-const ChatModelMiniReasoningConfigDef = (maxOutputTokens: number) =>
+const ChatModelReasoningEffortConfigDef = (maxOutputTokens: number) =>
   ({
     temperature: temperature.def,
     maxTokens: maxTokens(maxOutputTokens).def,
@@ -45,12 +57,12 @@ const ChatModelMiniReasoningConfigDef = (maxOutputTokens: number) =>
     logProbs: logProbs.def,
     topLogProbs: topLogProbs.def,
     toolChoice: toolChoice.def,
-    reasoningEffort: reasoningEffort.def,
+    reasoningEffort: reasoningEffortNoneLow.def,
   }) as const;
 
 export {
-  ChatModelMiniReasoningConfigDef,
-  ChatModelMiniReasoningConfigSchema,
   ChatModelReasoningConfigDef,
   ChatModelReasoningConfigSchema,
+  ChatModelReasoningEffortConfigDef,
+  ChatModelReasoningEffortConfigSchema,
 };
